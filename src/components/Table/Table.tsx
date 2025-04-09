@@ -1,3 +1,4 @@
+import { Workflow } from "../../types";
 import { Icon } from "../Icon";
 import { LastUpdate } from "../LastUpdate";
 import { Tags } from "../Tags";
