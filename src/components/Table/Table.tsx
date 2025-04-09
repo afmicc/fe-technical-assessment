@@ -72,7 +72,7 @@ const Headers = () => (
 const Rows = ({ data }: { data: Workflow[] }) => (
   <tbody className="text-sm">
     {data.map((item) => (
-      <tr key={item.id} className="border-t-[1px] border-zinc-950/10">
+      <tr key={item.id} className="border-t border-zinc-950/10">
         <Row item={item} />
       </tr>
     ))}

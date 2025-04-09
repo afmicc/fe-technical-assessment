@@ -13,12 +13,12 @@ export const Tags = ({ tags = [] }: { tags: Tag[] }) => {
   return <Tag tag={tag} colors={colors} />;
 };
 
-const borderClass = "border-[1px] border-zinc-950/10 rounded-full px-2 py-1";
+const borderClass = "border border-zinc-950/10 rounded-full px-2 py-1";
 
 const AddTag = () => {
   return (
     <button className={`${borderClass} flex items-center gap-1`}>
-      <Icon icon="plus" className="w-2 h-2" />
+      <Icon icon="plus" className="w-2 h-2 fill-slate-500	" />
       <span>Add Tag</span>
     </button>
   );
