@@ -1,4 +1,5 @@
 import { Icon } from "../Icon";
+import { LastUpdate } from "../LastUpdate";
 import { Tags } from "../Tags";
 
 type Response = {
@@ -87,8 +88,7 @@ const Row = ({ item }: { item: Workflow }) => (
       <Tags tags={item.tags} />
     </td>
     <td className="text-slate-500 py-5 pl-4">
-      {/* TODO: format from today */}
-      {item.lastUpdate}
+      <LastUpdate lastUpdate={item.lastUpdate} />
     </td>
     <td className="flex justify-center py-5 gap-2">
       <button className="rounded-md bg-zinc-950/10 p-1">
