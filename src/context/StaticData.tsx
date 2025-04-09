@@ -14,6 +14,7 @@ type StaticDataContextType = {
   loading: boolean;
   search: (searchTerm: string) => void;
   sort: (sort: string) => void;
+  destroy: (id: number) => void;
 };
 
 const initialState: StaticDataContextType = {
@@ -21,6 +22,7 @@ const initialState: StaticDataContextType = {
   loading: false,
   search: () => {},
   sort: () => {},
+  destroy: () => {},
 };
 
 export const StaticDataContext =
@@ -77,9 +79,16 @@ export const StaticDataProvider = ({
     }
   }, []);
 
+  const destroy = useCallback(
+    (id: number) => {
+      setWorkflows(workflows.filter((workflow) => workflow.id !== id));
+    },
+    [workflows]
+  );
+
   return (
     <StaticDataContext.Provider
-      value={{ workflows: results, loading, search, sort }}
+      value={{ workflows: results, loading, search, sort, destroy }}
     >
       {children}
     </StaticDataContext.Provider>

@@ -52,23 +52,30 @@ const Rows = () => {
   );
 };
 
-const Row = ({ item }: { item: Workflow }) => (
-  <>
-    <td className="text-zinc-500 capitalize py-5 pl-4">{item.type}</td>
-    <td className="py-5 pl-4">{item.name}</td>
-    <td className="py-5 pl-4">
-      <Tags tags={item.tags} />
-    </td>
-    <td className="text-slate-500 py-5 pl-4">
-      <LastUpdate lastUpdate={item.lastUpdate} />
-    </td>
-    <td className="flex justify-center py-5 gap-2">
-      <button className="rounded-md bg-zinc-950/10 p-1">
-        <Icon icon="pencil" className="w-3 h-3" />
-      </button>
-      <button className="rounded-md bg-zinc-950/10 p-1">
-        <Icon icon="trash" className="w-3 h-3" />
-      </button>
-    </td>
-  </>
-);
+const Row = ({ item }: { item: Workflow }) => {
+  const { destroy } = useStaticData();
+
+  return (
+    <>
+      <td className="text-zinc-500 capitalize py-5 pl-4">{item.type}</td>
+      <td className="py-5 pl-4">{item.name}</td>
+      <td className="py-5 pl-4">
+        <Tags tags={item.tags} />
+      </td>
+      <td className="text-slate-500 py-5 pl-4">
+        <LastUpdate lastUpdate={item.lastUpdate} />
+      </td>
+      <td className="flex justify-center py-5 gap-2">
+        <button className="rounded-md bg-zinc-950/10 p-1">
+          <Icon icon="pencil" className="w-3 h-3" />
+        </button>
+        <button
+          className="rounded-md bg-zinc-950/10 p-1"
+          onClick={() => destroy(item.id)}
+        >
+          <Icon icon="trash" className="w-3 h-3" />
+        </button>
+      </td>
+    </>
+  );
+};
