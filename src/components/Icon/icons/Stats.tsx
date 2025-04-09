@@ -5,8 +5,8 @@ export const Stats = (props: React.SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <g clip-path="url(#clip0_1_34603)">
-      <g clip-path="url(#clip1_1_34603)">
+    <g clipPath="url(#clip0_1_34603)">
+      <g clipPath="url(#clip1_1_34603)">
         <path
           d="M4.07153 7.30915H1.71439C1.49742 7.30915 1.32153 7.48504 1.32153 7.70201V11.6306C1.32153 11.8475 1.49742 12.0234 1.71439 12.0234H4.07153C4.2885 12.0234 4.46439 11.8475 4.46439 11.6306V7.70201C4.46439 7.48504 4.2885 7.30915 4.07153 7.30915Z"
           fill="#A1A1A1"
