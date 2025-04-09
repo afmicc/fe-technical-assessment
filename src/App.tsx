@@ -1,9 +1,12 @@
+import { Home } from "./pages/Home";
+import { Layout } from "./components/Layout";
+
 function App() {
   return (
-    <div className="text-lg">
-      Technical assessment
-    </div>
-  )
+    <Layout>
+      <Home />
+    </Layout>
+  );
 }
 
-export default App
+export default App;
