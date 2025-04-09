@@ -6,8 +6,8 @@ export const Trash = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M8.35186 2.13324H5.6481L5.10735 2.67399H3.21472V3.75549H10.7852V2.67399H8.89261L8.35186 2.13324ZM9.16298 5.37775V10.7853H4.83698V5.37775H9.16298ZM3.75547 4.29624H10.2445V10.7853C10.2445 11.3801 9.75781 11.8668 9.16298 11.8668H4.83698C4.24215 11.8668 3.75547 11.3801 3.75547 10.7853V4.29624Z"
       fill="#09090B"
     />
