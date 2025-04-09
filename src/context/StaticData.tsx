@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { Workflow } from "../types";
 import { getWorkflows } from "../services/AirOps";
@@ -6,12 +12,19 @@ import { getWorkflows } from "../services/AirOps";
 type StaticDataContextType = {
   workflows: Workflow[];
   loading: boolean;
+  search: (searchTerm: string) => void;
+  sort: (sort: string) => void;
 };
 
-export const StaticDataContext = createContext<StaticDataContextType>({
+const initialState: StaticDataContextType = {
   workflows: [],
   loading: false,
-});
+  search: () => {},
+  sort: () => {},
+};
+
+export const StaticDataContext =
+  createContext<StaticDataContextType>(initialState);
 
 export const StaticDataProvider = ({
   children,
@@ -20,6 +33,10 @@ export const StaticDataProvider = ({
 }) => {
   const [workflows, setWorkflows] = useState<Workflow[]>([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, search] = useState("");
+  const [sortParam, setSortParam] = useState<
+    "name" | "type" | "lastUpdate" | undefined
+  >();
 
   useEffect(() => {
     setLoading(true);
@@ -29,8 +46,41 @@ export const StaticDataProvider = ({
     });
   }, []);
 
+  const results = useMemo(() => {
+    const filtered = !searchTerm
+      ? workflows
+      : workflows.filter(
+          ({ name, type, tags }) =>
+            name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            tags.some((tag) =>
+              tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        );
+
+    if (sortParam === "name" || sortParam === "type") {
+      return filtered.sort((a, b) => a[sortParam].localeCompare(b[sortParam]));
+    } else if (sortParam === "lastUpdate") {
+      return filtered.sort((a, b) => a.lastUpdate - b.lastUpdate);
+    }
+
+    return filtered;
+  }, [searchTerm, workflows, sortParam]);
+
+  const sort = useCallback((sort: string) => {
+    if (sort === "Name") {
+      setSortParam("name");
+    } else if (sort === "Type") {
+      setSortParam("type");
+    } else if (sort === "Last Update") {
+      setSortParam("lastUpdate");
+    }
+  }, []);
+
   return (
-    <StaticDataContext.Provider value={{ workflows, loading }}>
+    <StaticDataContext.Provider
+      value={{ workflows: results, loading, search, sort }}
+    >
       {children}
     </StaticDataContext.Provider>
   );

@@ -1,25 +1,24 @@
+import { useStaticData } from "../../context";
 import { Icon } from "../Icon";
 
-export const Header = ({ className }: { className: string }) => (
-  <div
-    className={`${className} flex justify-between border-b-[.5px] border-gray-200 px-5 pt-5 pb-6`}
-  >
-    <h1 className="text-3xl font-bold">Workflows</h1>
-    <div className="flex gap-2">
-      <Sort
-        options={["Type", "Name", "Last Update"]}
-        onSort={() => {
-          // TODO: handle action
-        }}
-      />
-      <Search
-        onSearch={() => {
-          // TODO: handle action
-        }}
-      />
+export const Header = ({ className }: { className: string }) => {
+  const { search, sort } = useStaticData();
+
+  return (
+    <div
+      className={`${className} flex justify-between border-b-[.5px] border-gray-200 px-5 pt-5 pb-6`}
+    >
+      <h1 className="text-3xl font-bold">Workflows</h1>
+      <div className="flex gap-2">
+        <Sort
+          options={["Type", "Name", "Last Update"]}
+          onSort={(option) => sort(option)}
+        />
+        <Search onSearch={(term) => search(term)} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Sort = ({
   options,
@@ -46,14 +45,14 @@ const Sort = ({
         role="menu"
       >
         {options.map((option) => (
-          <span
+          <button
             key={option}
             className="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left cursor-pointer"
             role="menuitem"
             onClick={() => onSort(option)}
           >
             {option}
-          </span>
+          </button>
         ))}
       </div>
     </div>
