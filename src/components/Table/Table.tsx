@@ -1,3 +1,4 @@
+import { Icon } from "../Icon";
 import { Tags } from "../Tags";
 
 type Response = {
@@ -40,7 +41,7 @@ const items: Response = {
     {
       type: "agent",
       name: "📈 Growth Guru",
-      tags: [{ name: "marketing", color: "#32CD32" }],
+      tags: [{ name: "Content Creation", color: "#32CD32" }],
       lastUpdate: 1744071822048,
       id: 105,
     },
@@ -89,9 +90,13 @@ const Row = ({ item }: { item: Workflow }) => (
       {/* TODO: format from today */}
       {item.lastUpdate}
     </td>
-    <td className="py-5">
-      <button>{/* TODO: edit icon */} +</button>
-      <button>{/* TODO: delete icon */} +</button>
+    <td className="flex justify-center py-5 gap-2">
+      <button className="rounded-md bg-zinc-950/10 p-1">
+        <Icon icon="pencil" className="w-3 h-3" />
+      </button>
+      <button className="rounded-md bg-zinc-950/10 p-1">
+        <Icon icon="trash" className="w-3 h-3" />
+      </button>
     </td>
   </>
 );

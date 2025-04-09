@@ -1,3 +1,5 @@
+import { Icon } from "../Icon";
+
 export const Tags = ({ tags = [] }: { tags: Tag[] }) => {
   if (tags.length === 0) return <AddTag />;
 
@@ -15,9 +17,8 @@ const borderClass = "border-[1px] border-zinc-950/10 rounded-full px-2 py-1";
 
 const AddTag = () => {
   return (
-    <button className={borderClass}>
-      {/* TODO: plus icon */}
-      <span>+</span>
+    <button className={`${borderClass} flex items-center gap-1`}>
+      <Icon icon="plus" className="w-2 h-2" />
       <span>Add Tag</span>
     </button>
   );
