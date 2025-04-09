@@ -1,10 +1,13 @@
 import { Home } from "./pages/Home";
 import { Layout } from "./components/Layout";
+import { StaticDataProvider } from "./context";
 
 function App() {
   return (
     <Layout>
-      <Home />
+      <StaticDataProvider>
+        <Home />
+      </StaticDataProvider>
     </Layout>
   );
 }

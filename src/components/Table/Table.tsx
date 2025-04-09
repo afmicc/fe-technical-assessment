@@ -1,60 +1,14 @@
+import { useStaticData } from "../../context";
 import { Workflow } from "../../types";
 import { Icon } from "../Icon";
 import { LastUpdate } from "../LastUpdate";
 import { Tags } from "../Tags";
 
-type Response = {
-  count: number;
-  data: Array<Workflow>;
-};
-
-// TODO: replace
-const items: Response = {
-  count: 2,
-  data: [
-    {
-      type: "workflow",
-      name: "🌟 Star Tracker",
-      tags: [
-        { name: "analytics", color: "#1E90FF" },
-        { name: "tracking", color: "#FF4500" },
-      ],
-      lastUpdate: 1743553440970,
-      id: 101,
-    },
-    {
-      type: "agent",
-      name: "📈 Growth Guru",
-      tags: [
-        { name: "marketing", color: "#32CD32" },
-        { name: "business", color: "#FF6347" },
-        { name: "analytics", color: "#1E90FF" },
-      ],
-      lastUpdate: 1744071822048,
-      id: 102,
-    },
-    {
-      type: "workflow",
-      name: "🌟 Star Tracker",
-      tags: [],
-      lastUpdate: 1743553440970,
-      id: 106,
-    },
-    {
-      type: "agent",
-      name: "📈 Growth Guru",
-      tags: [{ name: "Content Creation", color: "#32CD32" }],
-      lastUpdate: 1744071822048,
-      id: 105,
-    },
-  ],
-};
-
 export const Table = () => (
   <div className="h-full px-5">
     <table className="w-full">
       <Headers />
-      <Rows data={[...items.data, ...items.data]} />
+      <Rows />
     </table>
   </div>
 );
@@ -71,15 +25,32 @@ const Headers = () => (
   </thead>
 );
 
-const Rows = ({ data }: { data: Workflow[] }) => (
-  <tbody className="text-sm">
-    {data.map((item) => (
-      <tr key={item.id} className="border-t border-zinc-950/10">
-        <Row item={item} />
-      </tr>
-    ))}
-  </tbody>
-);
+const Rows = () => {
+  const { workflows, loading } = useStaticData();
+
+  return (
+    <tbody className="text-sm  w-full">
+      {loading ? (
+        <tr className="border-t border-zinc-950/10">
+          <td colSpan={5} className="py-5">
+            <div
+              role="status"
+              className="flex justify-center items-center flex-1"
+            >
+              <span>Loading...</span>
+            </div>
+          </td>
+        </tr>
+      ) : (
+        workflows.map((item) => (
+          <tr key={item.id} className="border-t border-zinc-950/10">
+            <Row item={item} />
+          </tr>
+        ))
+      )}
+    </tbody>
+  );
+};
 
 const Row = ({ item }: { item: Workflow }) => (
   <>
